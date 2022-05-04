@@ -6,14 +6,18 @@
 #include <BLEAdvertisedDevice.h>
 
 int scanTime = 10; //In seconds
+int minimumDeviceThreshold = -60;
 BLEScan* pBLEScan;
 
 class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
-      Serial.printf("Advertised Device: %s \n", advertisedDevice.toString().c_str());
-      //Signal strength      
-      Serial.print(" RSSI: ");
-      Serial.println(advertisedDevice.getRSSI());
+      int rssi = advertisedDevice.getRSSI();
+      if(rssi > minimumDeviceThreshold){
+        Serial.printf("Advertised Device: %s \n", advertisedDevice.toString().c_str());
+        //Signal strength      
+        Serial.print(" RSSI: ");
+        Serial.println(advertisedDevice.getRSSI());
+      }
     }
 };
 
