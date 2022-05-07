@@ -13,7 +13,7 @@ class MyAdvertisedDeviceCallbacks: public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
       int rssi = advertisedDevice.getRSSI();
       if(rssi > minimumDeviceThreshold){
-        Serial.printf("Advertised Device: %s \n", advertisedDevice.toString().c_str());
+        Serial.printf("Advertised Device: %s \n", advertisedDevice.getServiceUUID().toString().c_str());
         //Signal strength      
         Serial.print(" RSSI: ");
         Serial.println(advertisedDevice.getRSSI());
